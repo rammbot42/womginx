@@ -1,8 +1,8 @@
 (function () {
-    // rewrite url /main/https:/google.com /main/https://google.com without refreshing the page
-    var rewriteDoubleSlash = window.location.pathname.match(/\/main(?<mod>\/[^\/_]+_)?(?<url_preslash>\/(?:http|ws)s?:\/)(?<url_postslash>[^\/].*)/);
+    // rewrite url /womginx/https:/google.com /womginx/https://google.com without refreshing the page
+    var rewriteDoubleSlash = window.location.pathname.match(/\/womginx(?<mod>\/[^\/_]+_)?(?<url_preslash>\/(?:http|ws)s?:\/)(?<url_postslash>[^\/].*)/);
     if (rewriteDoubleSlash) {
-        window.history.pushState(null, null, '/main' + (rewriteDoubleSlash.groups.mod || '') + rewriteDoubleSlash.groups.url_preslash + '/' + rewriteDoubleSlash.groups.url_postslash + window.location.hash);
+        window.history.pushState(null, null, '/womginx' + (rewriteDoubleSlash.groups.mod || '') + rewriteDoubleSlash.groups.url_preslash + '/' + rewriteDoubleSlash.groups.url_postslash + window.location.hash);
     }
     var mergeDoubleSlash = function (url) {
         // only merge if server forcefully merges and url is not a blob or data
@@ -48,7 +48,7 @@
         // fix google search replaceState
         window.history._womginx_replaceState = window.history.replaceState;
         window.history.replaceState = function (stateObj, title, url) {
-            if (window.location.pathname.startsWith("/main/https://www.google.com")) {
+            if (window.location.pathname.startsWith("/womginx/https://www.google.com")) {
                 url = "";
             }
             return this._womginx_replaceState(stateObj, title, url);
@@ -252,7 +252,7 @@
         });
 
         var getProxyUrl = function () {
-            return window.location.href.match(/^https?:\/\/[^\/]+\/main(\/[^_\/]+_)?\/(.*)/)[2];
+            return window.location.href.match(/^https?:\/\/[^\/]+\/womginx(\/[^_\/]+_)?\/(.*)/)[2];
             // return window.location.href;
         };
         // unfortunately, I was not able to find another way of copying the window.location
